@@ -34,10 +34,10 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        BACKEND_BUCKET_NAME: ${{ vars.BUCKET_NAME }}
-        BACKEND_REGION: ${{ vars.BUCKET_REGION }}
+        BACKEND_BUCKET_NAME: ${{ vars.BACKEND_BUCKET_NAME }}
+        BACKEND_REGION: ${{ vars.BACKEND_REGION }}
         BACKEND_KEY: ${{ vars.APPLICATION_NAME }}-${{ vars.ENVIRONMENT_NAME }}
-      working-directory: ${{ env.TERRAFORM_WORKING_DIRECTORY }}
+      working-directory: ${{ vars.TERRAFORM_WORKING_DIRECTORY }}
       run: |
         terraform init \
           -backend-config='bucket='$BACKEND_BUCKET_NAME \
