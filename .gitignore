@@ -1,3 +1,5 @@
 **/.terraform.*
 **/.terraform/**
 **/__azurite*.json
+**/.debug.sh
+**/.debug.tfvars
