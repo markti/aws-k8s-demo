@@ -107,18 +107,20 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - id: login-ecr
-      name: Log in to Amazon ECR
-      env:
-        AWS_REGION: ${{ vars.PRIMARY_REGION }}
-        AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ steps.terraform.outputs.registry_endpoint }}
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.PRIMARY_REGION }}
+
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build and push Docker image to ACR
       uses: docker/build-push-action@v5
       with:
         context: ${{ env.DOCKER_WORKING_DIRECTORY }}
         push: true
-        tags: ${{ steps.terraform.outputs.registry_endpoint }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.image-version.outputs.version }}
+        tags: ${{ steps.login-ecr-public.outputs.registry }}/${{ steps.terraform.outputs.registry_endpoint }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.image-version.outputs.version }}
