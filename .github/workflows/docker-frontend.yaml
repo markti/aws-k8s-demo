@@ -123,4 +123,4 @@ jobs:
       with:
         context: ${{ env.DOCKER_WORKING_DIRECTORY }}
         push: true
-        tags: ${{ steps.login-ecr-public.outputs.registry }}/${{ steps.terraform.outputs.registry_endpoint }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.image-version.outputs.version }}
+        tags: ${{ steps.login-ecr-public.outputs.registry }}/${{ steps.terraform.outputs.registry_endpoint }}:${{ steps.image-version.outputs.version }}
