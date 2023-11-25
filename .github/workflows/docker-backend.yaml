@@ -78,23 +78,26 @@ jobs:
         terraform_version: ${{ env.TERRAFORM_VERSION }}
         terraform_wrapper: false
 
-    - id: apply
-      name: Terraform Apply
+    - id: terraform
+      name: Terraform Output
       env:
         AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        BACKEND_BUCKET_NAME: ${{ vars.BUCKET_NAME }}
-        BACKEND_REGION: ${{ vars.BUCKET_REGION }}
-        TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-      working-directory: ${{ env.WORKING_DIRECTORY }}
+        BACKEND_BUCKET_NAME: ${{ vars.BACKEND_BUCKET_NAME }}
+        BACKEND_REGION: ${{ vars.BACKEND_REGION }}
+        BACKEND_KEY: ${{ vars.APPLICATION_NAME }}-${{ vars.ENVIRONMENT_NAME }}
+      working-directory: ${{ vars.TERRAFORM_WORKING_DIRECTORY }}
       run: |
         terraform init \
           -backend-config='bucket='$BACKEND_BUCKET_NAME \
           -backend-config='region='$BACKEND_REGION \
-          -backend-config="key=aws-vm-sample"
+          -backend-config='key='$BACKEND_KEY
 
-        terraform apply -target "random_shuffle.az" -auto-approve
         terraform apply -auto-approve
+
+        registry_endpoint=$(terraform output -raw registry_endpoint)
+        echo $registry_endpoint
+        echo "registry_endpoint=$registry_endpoint" >> "$GITHUB_OUTPUT"
 
     - id: image-version
       name: Generate Version Number
