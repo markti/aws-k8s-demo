@@ -42,6 +42,6 @@ jobs:
         terraform init \
           -backend-config='bucket='$BACKEND_BUCKET_NAME \
           -backend-config='region='$BACKEND_REGION \
-          -backend-config="key=aws-vm-sample"
+          -backend-config='key='$BACKEND_KEY
 
         terraform plan
