@@ -1,20 +1,24 @@
 name: Terraform-Apply
 
 on:
-  push:
-    branches: 
-    - main
-    paths:
-    - 'src/terraform/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 env:
   TERRAFORM_VERSION: '1.5.7'
-  WORKING_DIRECTORY: "./src/terraform"
 
 jobs:
 
   terraform-apply:
     runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ github.event.inputs.environment }}
+
     steps:
     - uses: actions/checkout@v3
 
@@ -32,8 +36,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         BACKEND_BUCKET_NAME: ${{ vars.BUCKET_NAME }}
         BACKEND_REGION: ${{ vars.BUCKET_REGION }}
-        TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-      working-directory: ${{ env.WORKING_DIRECTORY }}
+      working-directory: ${{ env.TERRAFORM_WORKING_DIRECTORY }}
       run: |
         terraform init \
           -backend-config='bucket='$BACKEND_BUCKET_NAME \
