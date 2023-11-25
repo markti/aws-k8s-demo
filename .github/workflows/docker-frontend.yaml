@@ -93,7 +93,7 @@ jobs:
           -backend-config='region='$BACKEND_REGION \
           -backend-config='key='$BACKEND_KEY
 
-        terraform apply -auto-approve
+        terraform apply -refresh-only -auto-approve
 
         registry_endpoint=$(terraform output -raw registry_endpoint)
         echo $registry_endpoint
