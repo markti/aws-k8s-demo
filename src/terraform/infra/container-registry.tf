@@ -1,6 +1,6 @@
 locals {
   repository_list = ["frontend", "backend"]
-  repositories    = { for idx, name in local.repositories : tostring(idx) => name }
+  repositories    = { for idx, name in local.repository_list : tostring(idx) => name }
 }
 
 resource "aws_ecr_repository" "main" {
