@@ -1,3 +1,5 @@
+
+/*
 resource "aws_ecr_repository" "frontend" {
   name                 = "ecr-${var.application_name}-${var.environment_name}-frontend"
   image_tag_mutability = "MUTABLE"
@@ -19,3 +21,4 @@ resource "aws_ecr_repository" "backend" {
   }
 
 }
+*/
