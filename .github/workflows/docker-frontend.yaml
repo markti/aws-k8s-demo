@@ -118,6 +118,12 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
+    - name: Debug output
+      run: |
+        echo "Registry: ${{ steps.login-ecr-public.outputs.registry }}"
+        echo "Registry Endpoint: ${{ steps.terraform.outputs.registry_endpoint }}"
+        echo "Version: ${{ steps.image-version.outputs.version }}"
+
     - name: Build and push Docker image to ACR
       uses: docker/build-push-action@v5
       with:
