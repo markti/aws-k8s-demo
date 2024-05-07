@@ -1,3 +1,4 @@
+/*
 resource "aws_iam_group" "ecr_image_pushers" {
   name = "${var.application_name}-${var.environment_name}-ecr-image-pushers"
 }
@@ -20,7 +21,7 @@ resource "aws_iam_group_policy" "ecr_image_pushers" {
           "ecr:UploadLayerPart",
           "ecr:CompleteLayerUpload"
         ],
-        Resource = aws_ecr_repository.main.arn
+        Resource = aws_ecr_repository.frontend.arn
       }
     ]
   })
@@ -31,3 +32,4 @@ resource "aws_iam_group_membership" "ecr_image_pushers" {
   users = var.ecr_image_pushers
   group = aws_iam_group.ecr_image_pushers.name
 }
+*/
