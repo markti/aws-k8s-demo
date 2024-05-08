@@ -8,6 +8,12 @@ variable "application_name" {
 variable "environment_name" {
   type = string
 }
+variable "cluster_name" {
+  type = string
+}
+variable "primary_region" {
+  type = string
+}
 variable "namespace" {
   type = string
 }

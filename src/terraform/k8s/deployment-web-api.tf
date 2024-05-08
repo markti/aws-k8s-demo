@@ -1,3 +1,4 @@
+/*
 locals {
   web_api_name = "fleet-api"
 }
@@ -62,3 +63,4 @@ resource "kubernetes_service" "web_api" {
     }
   }
 }
+*/

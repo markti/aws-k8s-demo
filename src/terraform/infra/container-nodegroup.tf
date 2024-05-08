@@ -1,3 +1,4 @@
+/*
 resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = "ng-user"
@@ -23,3 +24,4 @@ resource "aws_eks_node_group" "main" {
     aws_iam_role_policy_attachment.eks_ecr_policy,
   ]
 }
+*/

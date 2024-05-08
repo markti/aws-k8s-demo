@@ -1,5 +1,6 @@
 application_name = "fleet-app"
 environment_name = "dev"
+primary_region    = "us-west-2"
 namespace        = "app"
 web_app_image = {
   name    = "fleetops-frontend"

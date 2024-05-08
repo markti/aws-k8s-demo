@@ -1,3 +1,4 @@
+/*
 locals {
   web_app_name = "fleet-portal"
 }
@@ -78,3 +79,4 @@ resource "kubernetes_config_map" "web_app" {
     BackendEndpoint = var.backend_endpoint
   }
 }
+*/
