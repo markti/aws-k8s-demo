@@ -1,6 +1,6 @@
 
 resource "aws_iam_role" "container_node_group" {
-  name = "eks-node-group-example"
+  name = "eks-${var.application_name}-${var.environment_name}-nodegroup-role"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -12,6 +12,11 @@ resource "aws_iam_role" "container_node_group" {
     }]
     Version = "2012-10-17"
   })
+
+  tags = {
+    application = var.application_name
+    environment = var.environment_name
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "eks_worker_node_policy" {

@@ -21,4 +21,9 @@ resource "aws_eks_cluster" "main" {
     aws_iam_role_policy_attachment.eks_vpc_controller_policy,
     aws_cloudwatch_log_group.container_cluster
   ]
+  
+  tags = {
+    application = var.application_name
+    environment = var.environment_name
+  }
 }
