@@ -3,3 +3,4 @@
 **/__azurite*.json
 **/.debug.sh
 **/.debug.tfvars
+**/.DS_Store

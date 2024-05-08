@@ -11,7 +11,6 @@ on:
 env:
   DOTNET_VERSION: '6.0.401' # The .NET SDK version to use
   DOTNET_WORKING_DIRECTORY: "./src/dotnet/backend/FleetAPI"
-  DOCKER_IMAGE_NAME: "fleetops-backend"
   DOCKER_WORKING_DIRECTORY: "./src/dotnet/backend"
 
 jobs:
@@ -93,9 +92,9 @@ jobs:
           -backend-config='region='$BACKEND_REGION \
           -backend-config='key='$BACKEND_KEY
 
-        terraform apply -auto-approve
+        terraform apply -refresh-only -auto-approve
 
-        registry_endpoint=$(terraform output -raw registry_endpoint)
+        registry_endpoint=$(terraform output -raw backend_repository_url)
         echo $registry_endpoint
         echo "registry_endpoint=$registry_endpoint" >> "$GITHUB_OUTPUT"
 
@@ -107,16 +106,25 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Login to Azure Container Registry
-      uses: docker/login-action@v3
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
       with:
-        registry: ${{ steps.terraform.outputs.registry_endpoint }}
-        username: ${{ vars.DOCKER_ARM_CLIENT_ID }}
-        password: ${{ secrets.DOCKER_ARM_CLIENT_SECRET }}
+        aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.PRIMARY_REGION }}
+
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Debug output
+      run: |
+        echo "Registry Endpoint: ${{ steps.terraform.outputs.registry_endpoint }}"
+        echo "Version: ${{ steps.image-version.outputs.version }}"
 
     - name: Build and push Docker image to ACR
       uses: docker/build-push-action@v5
       with:
         context: ${{ env.DOCKER_WORKING_DIRECTORY }}
         push: true
-        tags: ${{ steps.terraform.outputs.registry_endpoint }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.image-version.outputs.version }}
+        tags: ${{ steps.terraform.outputs.registry_endpoint }}:${{ steps.image-version.outputs.version }}
