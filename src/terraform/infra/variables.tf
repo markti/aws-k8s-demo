@@ -16,3 +16,9 @@ variable "vpc_cidr_block" {
 variable "az_count" {
   type = number
 }
+variable "node_image_type" {
+  type = string
+}
+variable "node_size" {
+  type = string
+}
