@@ -2,7 +2,7 @@ locals {
   cluster_name       = "eks-${var.application_name}-${var.environment_name}"
   cluster_subnet_ids = [for subnet in values(aws_subnet.backend) : subnet.id]
 }
-
+/*
 resource "aws_eks_cluster" "main" {
   name                      = local.cluster_name
   role_arn                  = aws_iam_role.container_cluster.arn
@@ -21,9 +21,9 @@ resource "aws_eks_cluster" "main" {
     aws_iam_role_policy_attachment.eks_vpc_controller_policy,
     aws_cloudwatch_log_group.container_cluster
   ]
-  
+
   tags = {
     application = var.application_name
     environment = var.environment_name
   }
-}
+}*/
