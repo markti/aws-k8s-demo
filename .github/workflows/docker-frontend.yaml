@@ -95,7 +95,7 @@ jobs:
 
         terraform apply -refresh-only -auto-approve
 
-        registry_endpoint=$(terraform output -raw registry_endpoint)
+        registry_endpoint=$(terraform output -raw frontend_repository_url)
         echo $registry_endpoint
         echo "registry_endpoint=$registry_endpoint" >> "$GITHUB_OUTPUT"
 
