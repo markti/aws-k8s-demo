@@ -50,7 +50,7 @@ resource "aws_security_group_rule" "nodeport_cluster_udp" {
 
 resource "aws_security_group" "cluster_nodes" {
   name   = "sg-${var.application_name}-${var.environment_name}-cluster-nodes"
-  vpc_id = aws_vpc.cluster_vpc.id
+  vpc_id = aws_vpc.main.id
 
   egress {
     from_port = 0
