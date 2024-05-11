@@ -2,19 +2,13 @@ locals {
   cluster_name       = "eks-${var.application_name}-${var.environment_name}"
   cluster_subnet_ids = [for subnet in values(aws_subnet.backend) : subnet.id]
 }
-
+/*
 resource "aws_eks_cluster" "main" {
   name                      = local.cluster_name
   role_arn                  = aws_iam_role.container_cluster.arn
   enabled_cluster_log_types = ["api", "audit"]
 
   vpc_config {
-
-    /*
-    security_group_ids = [
-      aws_security_group.cluster.id,
-      aws_security_group.cluster_nodes.id
-    ]*/
 
     subnet_ids              = local.cluster_subnet_ids
     endpoint_public_access  = true
@@ -34,3 +28,4 @@ resource "aws_eks_cluster" "main" {
     environment = var.environment_name
   }
 }
+*/
