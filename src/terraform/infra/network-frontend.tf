@@ -3,9 +3,10 @@ resource "aws_subnet" "frontend" {
 
   for_each = local.public_subnets
 
-  vpc_id            = aws_vpc.main.id
-  availability_zone = each.value.availability_zone
-  cidr_block        = each.value.cidr_block
+  vpc_id                  = aws_vpc.main.id
+  availability_zone       = each.value.availability_zone
+  cidr_block              = each.value.cidr_block
+  map_public_ip_on_launch = true
 
 }
 
