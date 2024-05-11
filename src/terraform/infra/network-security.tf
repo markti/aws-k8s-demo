@@ -1,4 +1,4 @@
-
+/*
 resource "aws_security_group" "cluster" {
   name   = "sg-${var.application_name}-${var.environment_name}-cluster"
   vpc_id = aws_vpc.main.id
@@ -72,3 +72,4 @@ resource "aws_security_group_rule" "nodeport" {
   description       = "nodeport"
   protocol          = "tcp"
 }
+*/
