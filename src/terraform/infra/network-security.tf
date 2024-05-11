@@ -1,5 +1,5 @@
 
-resource "aws_security_group" "cluster_sg" {
+resource "aws_security_group" "cluster" {
   name   = ""
   vpc_id = aws_vpc.main.id
 
@@ -15,7 +15,7 @@ resource "aws_security_group" "cluster_sg" {
 
 resource "aws_security_group_rule" "cluster_ingress_https" {
 
-  security_group_id = aws_security_group.cluster_sg.id
+  security_group_id = aws_security_group.cluster.id
   type              = "ingress"
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 443
@@ -25,7 +25,7 @@ resource "aws_security_group_rule" "cluster_ingress_https" {
 
 resource "aws_security_group_rule" "nodeport_cluster" {
 
-  security_group_id = aws_security_group.cluster_sg.id
+  security_group_id = aws_security_group.cluster.id
   type              = "ingress"
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 30000
@@ -37,7 +37,7 @@ resource "aws_security_group_rule" "nodeport_cluster" {
 
 resource "aws_security_group_rule" "nodeport_cluster_udp" {
 
-  security_group_id = aws_security_group.cluster_sg.id
+  security_group_id = aws_security_group.cluster.id
   type              = "ingress"
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 30000

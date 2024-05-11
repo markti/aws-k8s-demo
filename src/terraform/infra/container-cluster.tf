@@ -9,6 +9,11 @@ resource "aws_eks_cluster" "main" {
   enabled_cluster_log_types = ["api", "audit"]
 
   vpc_config {
+
+    security_group_ids = [
+      aws_security_group.cluster.id
+    ]
+
     subnet_ids              = local.cluster_subnet_ids
     endpoint_public_access  = true
     endpoint_private_access = true
