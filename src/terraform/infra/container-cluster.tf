@@ -12,6 +12,7 @@ resource "aws_eks_cluster" "main" {
 
     security_group_ids = [
       aws_security_group.cluster.id
+      aws_security_group.cluster_nodes.id
     ]
 
     subnet_ids              = local.cluster_subnet_ids
