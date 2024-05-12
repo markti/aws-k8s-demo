@@ -22,3 +22,6 @@ variable "node_image_type" {
 variable "node_size" {
   type = string
 }
+variable "admin_users" {
+  type = list(string)
+}
