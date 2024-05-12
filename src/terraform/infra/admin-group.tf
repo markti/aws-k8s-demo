@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "admin" {
 resource "aws_iam_policy" "admin" {
   name        = "${var.application_name}-${var.environment_name}-admin"
   description = "Policy to allow specific EKS and SSM access"
-  policy      = data.aws_iam_policy_document.admin_policy.json
+  policy      = data.aws_iam_policy_document.admin.json
 }
 
 resource "aws_iam_group_policy_attachment" "admin" {
