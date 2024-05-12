@@ -13,3 +13,6 @@ output "backend_repository_url" {
 output "kubernetes_cluster_name" {
   value = "aws_eks_cluster.main.name"
 }
+output "primary_region" {
+  value = "var.primary_region"
+}

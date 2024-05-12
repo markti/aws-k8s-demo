@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       kubernetes_cluster_name: ${{ steps.apply.outputs.kubernetes_cluster_name }}
+      primary_region: ${{ steps.apply.outputs.primary_region }}
 
     environment:
       name: ${{ inputs.environment }}
@@ -50,6 +51,9 @@ jobs:
 
         kubernetes_cluster_name=$(terraform output -raw kubernetes_cluster_name)
         echo "kubernetes_cluster_name=$kubernetes_cluster_name" >> "$GITHUB_OUTPUT"
+
+        primary_region=$(terraform output -raw primary_region)
+        echo "primary_region=$primary_region" >> "$GITHUB_OUTPUT"
         
   k8s:
     runs-on: ubuntu-latest
@@ -78,6 +82,7 @@ jobs:
         TF_VAR_application_name: ${{ vars.APPLICATION_NAME }}
         TF_VAR_environment_name: ${{ vars.ENVIRONMENT_NAME }}
         TF_VAR_kubernetes_cluster_name: ${{ needs.infra.outputs.kubernetes_cluster_name }}
+        TF_VAR_primary_region: ${{ needs.infra.outputs.primary_region }}
       working-directory: ./src/terraform/k8s
       run: |
         terraform init \

@@ -1,7 +1,3 @@
-variable "registry_endpoint" {
-  type        = string
-  description = "Provided by the GitHub Action"
-}
 variable "application_name" {
   type = string
 }
