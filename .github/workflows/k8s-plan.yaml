@@ -81,7 +81,7 @@ jobs:
         BACKEND_KEY: ${{ vars.APPLICATION_NAME }}-${{ vars.ENVIRONMENT_NAME }}
         TF_VAR_application_name: ${{ vars.APPLICATION_NAME }}
         TF_VAR_environment_name: ${{ vars.ENVIRONMENT_NAME }}
-        TF_VAR_kubernetes_cluster_name: ${{ needs.infra.outputs.kubernetes_cluster_name }}
+        TF_VAR_cluster_name: ${{ needs.infra.outputs.kubernetes_cluster_name }}
         TF_VAR_primary_region: ${{ needs.infra.outputs.primary_region }}
       working-directory: ./src/terraform/k8s
       run: |
