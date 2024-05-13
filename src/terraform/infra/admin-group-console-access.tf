@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "console_access" {
   statement {
     effect    = "Allow"
     actions   = ["sts:AssumeRole"]
-    resources = aws_iam_role.console_access.arn
+    resources = [aws_iam_role.console_access.arn]
   }
 }
 
