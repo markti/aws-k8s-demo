@@ -17,5 +17,5 @@ output "primary_region" {
   value = var.primary_region
 }
 output "console_role_arn" {
-  value = aws_iam_role.console.arn
+  value = aws_iam_role.console_access.arn
 }
