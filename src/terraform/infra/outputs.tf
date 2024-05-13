@@ -16,3 +16,6 @@ output "kubernetes_cluster_name" {
 output "primary_region" {
   value = var.primary_region
 }
+output "console_role_arn" {
+  value = aws_iam_role.console.arn
+}

@@ -18,6 +18,7 @@ jobs:
     outputs:
       kubernetes_cluster_name: ${{ steps.apply.outputs.kubernetes_cluster_name }}
       primary_region: ${{ steps.apply.outputs.primary_region }}
+      console_role: ${{ steps.apply.outputs.console_role }}
 
     environment:
       name: ${{ inputs.environment }}
@@ -54,6 +55,9 @@ jobs:
 
         primary_region=$(terraform output -raw primary_region)
         echo "primary_region=$primary_region" >> "$GITHUB_OUTPUT"
+
+        console_role=$(terraform output -raw console_role_arn)
+        echo "console_role=$console_role" >> "$GITHUB_OUTPUT"
         
   k8s:
     runs-on: ubuntu-latest
@@ -122,3 +126,9 @@ jobs:
     - name: Test eksctl command
       run: |
         eksctl get clusters
+        eksctl create iamidentitymapping \
+          --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
+          --region=${{ needs.infra.outputs.primary_region }} \
+          --arn ${{ needs.infra.outputs.console_role }} \
+          --group eks-console-dashboard-full-access-group \
+          --no-duplicate-arns
