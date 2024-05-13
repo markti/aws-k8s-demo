@@ -22,7 +22,7 @@ resource "aws_iam_policy" "console_access" {
   name        = "${var.application_name}-${var.environment_name}-console-access"
   description = "Allow users to assume the role to access EKS from the console"
 
-  policy = aws_iam_policy_document.console_access.json
+  policy = data.aws_iam_policy_document.console_access.json
 }
 
 data "aws_iam_policy_document" "console_access" {
