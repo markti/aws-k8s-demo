@@ -5,7 +5,6 @@ resource "aws_iam_group" "admin" {
 data "aws_iam_policy_document" "admin" {
   statement {
     effect = "Allow"
-
     actions = [
       "eks:ListFargateProfiles",
       "eks:DescribeNodegroup",
@@ -17,13 +16,18 @@ data "aws_iam_policy_document" "admin" {
       "eks:DescribeAddonVersions",
       "eks:ListClusters",
       "eks:ListIdentityProviderConfigs",
-      "iam:ListRoles",
-      "ssm:GetParameter"
+      "iam:ListRoles"
     ]
-
     resources = ["*"]
   }
 
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameter"
+    ]
+    resources = ["arn:aws:ssm:*:${data.aws_caller_identity.current.account_id}:parameter/*"]
+  }
 }
 
 resource "aws_iam_policy" "admin" {
