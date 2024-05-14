@@ -19,6 +19,7 @@ jobs:
       kubernetes_cluster_name: ${{ steps.apply.outputs.kubernetes_cluster_name }}
       primary_region: ${{ steps.apply.outputs.primary_region }}
       console_role: ${{ steps.apply.outputs.console_role }}
+      admin_group: ${{ steps.apply.outputs.admin_group }}
 
     environment:
       name: ${{ inputs.environment }}
@@ -58,6 +59,9 @@ jobs:
 
         console_role=$(terraform output -raw console_role_arn)
         echo "console_role=$console_role" >> "$GITHUB_OUTPUT"
+
+        admin_group=$(terraform output -raw admin_group_arn)
+        echo "admin_group=$admin_group" >> "$GITHUB_OUTPUT"
         
   k8s:
     runs-on: ubuntu-latest
@@ -129,10 +133,17 @@ jobs:
         eksctl get iamidentitymapping \
           --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
           --region=${{ needs.infra.outputs.primary_region }}
-          
+
         eksctl create iamidentitymapping \
           --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
           --region=${{ needs.infra.outputs.primary_region }} \
           --arn ${{ needs.infra.outputs.console_role }} \
+          --group eks-console-dashboard-full-access-group \
+          --no-duplicate-arns
+
+        eksctl create iamidentitymapping \
+          --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
+          --region=${{ needs.infra.outputs.primary_region }} \
+          --arn ${{ needs.infra.outputs.admin_group }} \
           --group eks-console-dashboard-full-access-group \
           --no-duplicate-arns

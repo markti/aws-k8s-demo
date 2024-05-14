@@ -19,3 +19,6 @@ output "primary_region" {
 output "console_role_arn" {
   value = aws_iam_role.console_access.arn
 }
+output "admin_group_arn" {
+  value = aws_iam_group.admin.arn
+}
