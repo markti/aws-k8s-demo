@@ -32,6 +32,11 @@ resource "aws_iam_policy" "admin" {
   policy      = data.aws_iam_policy_document.admin.json
 }
 
+resource "aws_iam_role_policy_attachment" "console_access" {
+  role       = aws_iam_role.console_access.name
+  policy_arn = aws_iam_policy.admin.arn
+}
+
 resource "aws_iam_group_policy_attachment" "admin" {
   group      = aws_iam_group.admin.name
   policy_arn = aws_iam_policy.admin.arn
