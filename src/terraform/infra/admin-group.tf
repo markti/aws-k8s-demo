@@ -68,10 +68,9 @@ data "aws_iam_user" "admin" {
   user_name = each.key
 
 }
-/*
+
 resource "aws_iam_user_policy_attachment" "console_access" {
   for_each   = local.admin_map
-  user       = data.aws_iam_user.admin[each.key].name
+  user       = each.key
   policy_arn = aws_iam_policy.console_access.arn
 }
-*/
