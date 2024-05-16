@@ -126,3 +126,24 @@ jobs:
         aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ needs.infra.outputs.primary_region }}
+
+    - name: Test eksctl command
+      run: |
+        eksctl get clusters
+        eksctl get iamidentitymapping \
+          --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
+          --region=${{ needs.infra.outputs.primary_region }}
+
+        eksctl create iamidentitymapping \
+          --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
+          --region=${{ needs.infra.outputs.primary_region }} \
+          --arn ${{ needs.infra.outputs.console_role }} \
+          --group eks-console-dashboard-full-access-group \
+          --no-duplicate-arns
+
+        eksctl create iamidentitymapping \
+          --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
+          --region=${{ needs.infra.outputs.primary_region }} \
+          --arn arn:aws:iam::312344499806:user/markti \
+          --group eks-console-dashboard-restricted-access-group \
+          --no-duplicate-arns
