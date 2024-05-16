@@ -67,6 +67,6 @@ data "aws_iam_user" "admin" {
 
 resource "aws_iam_user_policy_attachment" "console_access" {
   count      = length(var.admin_users)
-  user       = data.aws_iam_user.admin[count.index].name
+  user       = data.aws_iam_user.admin[count.index][0].name
   policy_arn = aws_iam_policy.console_access.arn
 }
