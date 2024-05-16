@@ -57,3 +57,16 @@ resource "aws_iam_group_policy_attachment" "console_access" {
   group      = aws_iam_group.admin.name
   policy_arn = aws_iam_policy.console_access.arn
 }
+
+data "aws_iam_user" "admin" {
+
+  count = length(var.admin_users)
+  name  = var.admin_users[count.index]
+
+}
+
+resource "aws_iam_user_policy_attachment" "console_access" {
+  count      = length(var.admin_users)
+  user       = data.aws_iam_user.admin_users[count.index].name
+  policy_arn = aws_iam_policy.console_access.arn
+}
