@@ -60,8 +60,8 @@ resource "aws_iam_group_policy_attachment" "console_access" {
 
 data "aws_iam_user" "admin" {
 
-  count = length(var.admin_users)
-  name  = var.admin_users[count.index]
+  count     = length(var.admin_users)
+  user_name = var.admin_users[count.index]
 
 }
 
