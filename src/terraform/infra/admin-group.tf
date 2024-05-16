@@ -52,3 +52,8 @@ resource "aws_iam_group_membership" "admin" {
   users = var.admin_users
   group = aws_iam_group.admin.name
 }
+
+resource "aws_iam_group_policy_attachment" "console_access" {
+  group      = aws_iam_group.admin.name
+  policy_arn = aws_iam_policy.console_access.arn
+}
