@@ -92,7 +92,7 @@ resource "kubernetes_cluster_role_binding_v1" "eks_console_dashboard_full_access
 
   role_ref {
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.eks_console_dashboard_full_access_clusterrole.metadata[0].name
+    name      = kubernetes_cluster_role_v1.eks_console_dashboard_full_access_clusterrole.metadata[0].name
     api_group = "rbac.authorization.k8s.io"
   }
 
