@@ -58,15 +58,19 @@ resource "aws_iam_group_policy_attachment" "console_access" {
   policy_arn = aws_iam_policy.console_access.arn
 }
 
+locals {
+  admin_map = { for idx, user in var.admin_users : user => user }
+}
+
 data "aws_iam_user" "admin" {
 
-  count     = length(var.admin_users)
-  user_name = var.admin_users[count.index]
+  for_each  = local.admin_map
+  user_name = each.key
 
 }
 
 resource "aws_iam_user_policy_attachment" "console_access" {
-  count      = length(var.admin_users)
-  user       = data.aws_iam_user.admin[count.index][0].name
+  for_each   = local.admin_map
+  user       = each.key
   policy_arn = aws_iam_policy.console_access.arn
 }
