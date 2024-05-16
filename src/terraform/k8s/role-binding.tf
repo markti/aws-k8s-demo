@@ -1,4 +1,4 @@
-
+/*
 resource "kubernetes_cluster_role_v1" "eks_console_dashboard_full_access_clusterrole" {
   metadata {
     name = "eks-console-dashboard-full-access-clusterrole"
@@ -93,7 +93,7 @@ resource "kubernetes_cluster_role_binding_v1" "eks_console_dashboard_full_access
 
   role_ref {
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role_v1.eks_console_dashboard_full_access_clusterrole.metadata[0].name
+    name      = "eks-console-dashboard-full-access-clusterrole"
     api_group = "rbac.authorization.k8s.io"
   }
 
@@ -103,3 +103,4 @@ resource "kubernetes_cluster_role_binding_v1" "eks_console_dashboard_full_access
     api_group = "rbac.authorization.k8s.io"
   }
 }
+*/
