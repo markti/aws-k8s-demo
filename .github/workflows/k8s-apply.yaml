@@ -140,3 +140,8 @@ jobs:
           --arn ${{ needs.infra.outputs.console_role }} \
           --group eks-console-dashboard-full-access-group \
           --no-duplicate-arns
+          
+        eksctl delete iamidentitymapping \
+          --cluster ${{ needs.infra.outputs.kubernetes_cluster_name }} \
+          --region=${{ needs.infra.outputs.primary_region }} \
+          --arn ${{ needs.infra.outputs.console_role }}
