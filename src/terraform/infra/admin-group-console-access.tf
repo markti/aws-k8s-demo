@@ -54,6 +54,7 @@ resource "aws_iam_role" "console_access" {
   assume_role_policy = data.aws_iam_policy_document.console_access_assume_role_policy.json
 }
 
+/*
 resource "aws_eks_access_entry" "main" {
   cluster_name  = aws_eks_cluster.main.name
   principal_arn = aws_iam_role.console_access.arn
@@ -69,3 +70,4 @@ resource "aws_eks_access_policy_association" "console_access" {
     type = "cluster"
   }
 }
+*/
