@@ -1,4 +1,4 @@
-data "aws_caller_identity" "current" {}
+
 
 data "aws_iam_policy_document" "console_access" {
   version = "2012-10-17"
@@ -52,4 +52,20 @@ data "aws_iam_policy_document" "console_access_assume_role_policy" {
 resource "aws_iam_role" "console_access" {
   name               = "${var.application_name}-${var.environment_name}-console-access"
   assume_role_policy = data.aws_iam_policy_document.console_access_assume_role_policy.json
+}
+
+resource "aws_eks_access_entry" "main" {
+  cluster_name  = aws_eks_cluster.main.name
+  principal_arn = aws_iam_role.console_access.arn
+  type          = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "console_access" {
+  cluster_name  = aws_eks_cluster.main.name
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
+  principal_arn = aws_iam_group.admin.arn
+
+  access_scope {
+    type = "cluster"
+  }
 }
