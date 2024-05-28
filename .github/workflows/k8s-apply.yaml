@@ -95,7 +95,7 @@ jobs:
         TF_VAR_environment_name: ${{ vars.ENVIRONMENT_NAME }}
         TF_VAR_cluster_name: ${{ needs.infra.outputs.kubernetes_cluster_name }}
         TF_VAR_primary_region: ${{ needs.infra.outputs.primary_region }}
-        TR_VAR_alb_controller_role: ${{ needs.infra.outputs.alb_controller_role }}
+        TF_VAR_alb_controller_role: ${{ needs.infra.outputs.alb_controller_role }}
       working-directory: ./src/terraform/k8s
       run: |
         terraform init \
