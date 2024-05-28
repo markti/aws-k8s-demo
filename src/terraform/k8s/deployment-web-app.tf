@@ -43,8 +43,8 @@ resource "kubernetes_deployment" "web_app" {
   }
 
   timeouts {
-    create = "10m"
-    update = "10m"
+    create = "5m"
+    update = "5m"
     delete = "5m"
   }
 }
