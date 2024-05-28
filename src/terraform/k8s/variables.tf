@@ -15,3 +15,9 @@ variable "primary_region" {
 variable "namespace" {
   type = string
 }
+variable "web_app_image" {
+  type = object({
+    name    = string
+    version = string
+  })
+}
