@@ -22,3 +22,6 @@ output "console_role_arn" {
 output "admin_group_arn" {
   value = aws_iam_group.admin.arn
 }
+output "alb_controller_role" {
+  value = aws_iam_role.alb_controller.arn
+}

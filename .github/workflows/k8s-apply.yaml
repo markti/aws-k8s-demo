@@ -20,6 +20,7 @@ jobs:
       primary_region: ${{ steps.apply.outputs.primary_region }}
       console_role: ${{ steps.apply.outputs.console_role }}
       admin_group: ${{ steps.apply.outputs.admin_group }}
+      alb_controller_role: ${{ steps.apply.outputs.alb_controller_role }}
 
     environment:
       name: ${{ inputs.environment }}
@@ -60,6 +61,9 @@ jobs:
         console_role=$(terraform output -raw console_role_arn)
         echo "console_role=$console_role" >> "$GITHUB_OUTPUT"
 
+        alb_controller_role=$(terraform output -raw alb_controller_role)
+        echo "alb_controller_role=$alb_controller_role" >> "$GITHUB_OUTPUT"
+
         admin_group=$(terraform output -raw admin_group_arn)
         echo "admin_group=$admin_group" >> "$GITHUB_OUTPUT"
         
@@ -91,6 +95,7 @@ jobs:
         TF_VAR_environment_name: ${{ vars.ENVIRONMENT_NAME }}
         TF_VAR_cluster_name: ${{ needs.infra.outputs.kubernetes_cluster_name }}
         TF_VAR_primary_region: ${{ needs.infra.outputs.primary_region }}
+        TR_VAR_alb_controller_role: ${{ needs.infra.outputs.alb_controller_role }}
       working-directory: ./src/terraform/k8s
       run: |
         terraform init \

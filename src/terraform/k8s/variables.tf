@@ -21,3 +21,6 @@ variable "web_app_image" {
     version = string
   })
 }
+variable "alb_controller_role" {
+  type = string
+}
