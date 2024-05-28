@@ -73,7 +73,7 @@ resource "kubernetes_config_map" "web_app" {
 
 resource "kubernetes_ingress_v1" "web_app" {
   metadata {
-    name      = "web_app"
+    name      = "${local.web_app_name}-ingress"
     namespace = var.namespace
     annotations = {
       "kubernetes.io/ingress.class"            = "alb"
