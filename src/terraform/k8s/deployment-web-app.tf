@@ -2,7 +2,7 @@
 locals {
   web_app_name = "fleet-portal"
 }
-
+/*
 resource "kubernetes_deployment" "web_app" {
   metadata {
     name      = local.web_app_name
@@ -108,3 +108,4 @@ resource "kubernetes_ingress_v1" "web_app" {
     }
   }
 }
+*/
