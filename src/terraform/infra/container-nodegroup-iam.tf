@@ -46,3 +46,9 @@ resource "aws_iam_role_policy_attachment" "cloudwatch" {
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
   role       = aws_iam_role.container_node_group.name
 }
+
+# ALB
+resource "aws_iam_role_policy_attachment" "cloudwatch" {
+  policy_arn = aws_iam_policy.alb_controller.arn
+  role       = aws_iam_role.container_node_group.name
+}
