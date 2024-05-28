@@ -27,7 +27,7 @@ resource "kubernetes_deployment" "web_app" {
 
       spec {
         container {
-          image = "${var.web_app_image.name}:${var.web_app_image.version}"
+          image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.primary_region}.amazonaws.com/${var.web_app_image.name}:${var.web_app_image.version}"
           name  = local.web_app_name
           port {
             container_port = 5000
