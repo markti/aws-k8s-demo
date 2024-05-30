@@ -77,38 +77,3 @@ resource "kubernetes_config_map" "web_api" {
     BackendEndpoint = ""
   }
 }
-/*
-resource "kubernetes_ingress_v1" "web_api" {
-  metadata {
-    name      = "${local.web_api_name}-ingress"
-    namespace = var.namespace
-    annotations = {
-      "kubernetes.io/ingress.class"                = "nginx"
-      "nginx.ingress.kubernetes.io/rewrite-target" = "/"
-    }
-  }
-  spec {
-    rule {
-      http {
-        path {
-          path      = "/"
-          path_type = "Prefix"
-
-          backend {
-            service {
-              name = kubernetes_service.web_api.metadata[0].name
-              port {
-                number = 8080
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  depends_on = [
-    kubernetes_service.web_api,
-    helm_release.ingress
-  ]
-}*/

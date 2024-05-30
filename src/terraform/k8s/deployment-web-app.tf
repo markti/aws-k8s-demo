@@ -77,14 +77,13 @@ resource "kubernetes_config_map" "web_app" {
     BackendEndpoint = ""
   }
 }
-
+/*
 resource "kubernetes_ingress_v1" "web_app" {
   metadata {
     name      = "${local.web_app_name}-ingress"
     namespace = var.namespace
     annotations = {
       "kubernetes.io/ingress.class"                = "nginx"
-      #"nginx.ingress.kubernetes.io/rewrite-target" = "/"
     }
   }
   spec {
@@ -126,3 +125,4 @@ resource "kubernetes_ingress_v1" "web_app" {
     helm_release.ingress
   ]
 }
+*/
