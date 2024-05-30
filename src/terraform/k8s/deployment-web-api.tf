@@ -58,7 +58,7 @@ resource "kubernetes_service" "web_api" {
   spec {
     type = "ClusterIP"
     port {
-      port        = 8081
+      port        = 8080
       target_port = 5000
     }
     selector = {
@@ -98,7 +98,7 @@ resource "kubernetes_ingress_v1" "web_api" {
             service {
               name = kubernetes_service.web_api.metadata[0].name
               port {
-                number = 8081
+                number = 8080
               }
             }
           }
