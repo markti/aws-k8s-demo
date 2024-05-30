@@ -58,7 +58,8 @@ resource "kubernetes_service" "web_app" {
   spec {
     type = "ClusterIP"
     port {
-      port = 5000
+      port        = 80
+      target_port = 5000
     }
     selector = {
       app = local.web_app_name

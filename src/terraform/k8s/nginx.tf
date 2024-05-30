@@ -14,4 +14,5 @@ resource "helm_release" "ingress" {
     name  = "service.annotations"
     value = "service.beta.kubernetes.io/aws-load-balancer-type: nlb"
   }
+
 }
