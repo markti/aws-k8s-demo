@@ -11,6 +11,7 @@ on:
 env:
   DOTNET_VERSION: '6.0.401' # The .NET SDK version to use
   DOTNET_WORKING_DIRECTORY: "./src/dotnet/backend/FleetAPI"
+  DOCKER_IMAGE_NAME: "fleetops-backend"
   DOCKER_WORKING_DIRECTORY: "./src/dotnet/backend"
 
 jobs:

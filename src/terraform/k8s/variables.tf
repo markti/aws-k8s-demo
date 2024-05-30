@@ -21,6 +21,12 @@ variable "web_app_image" {
     version = string
   })
 }
+variable "web_api_image" {
+  type = object({
+    name    = string
+    version = string
+  })
+}
 variable "alb_controller_role" {
   type = string
 }
