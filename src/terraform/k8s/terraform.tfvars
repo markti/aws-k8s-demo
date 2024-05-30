@@ -7,5 +7,5 @@ web_app_image = {
 }
 web_api_image = {
   name    = "ecr-fleet-portal-dev-backend"
-  version = "2024.05.2"
+  version = "2024.05.3"
 }
