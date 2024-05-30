@@ -83,7 +83,8 @@ resource "kubernetes_ingress_v1" "web_app" {
     name      = "${local.web_app_name}-ingress"
     namespace = var.namespace
     annotations = {
-      "kubernetes.io/ingress.class" = "nginx"
+      "kubernetes.io/ingress.class"                = "nginx"
+      "nginx.ingress.kubernetes.io/rewrite-target" = "/"
     }
   }
   spec {
