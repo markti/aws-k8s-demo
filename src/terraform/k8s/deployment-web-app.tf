@@ -48,11 +48,14 @@ resource "kubernetes_deployment" "web_app" {
     delete = "5m"
   }
 }
-
+/*
 resource "kubernetes_service" "web_app" {
   metadata {
     name      = "${local.web_app_name}-service"
     namespace = var.namespace
+    annotations = {
+      "service.beta.kubernetes.io/aws-load-balancer-type" = "alb"
+    }
   }
   spec {
     type = "LoadBalancer"
@@ -64,7 +67,7 @@ resource "kubernetes_service" "web_app" {
       app = local.web_app_name
     }
   }
-}
+}*/
 
 resource "kubernetes_config_map" "web_app" {
   metadata {
@@ -76,7 +79,7 @@ resource "kubernetes_config_map" "web_app" {
     BackendEndpoint = ""
   }
 }
-
+/*
 resource "kubernetes_ingress_v1" "web_app" {
   metadata {
     name      = "${local.web_app_name}-ingress"
@@ -108,3 +111,4 @@ resource "kubernetes_ingress_v1" "web_app" {
     }
   }
 }
+*/

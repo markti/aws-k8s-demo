@@ -1,3 +1,4 @@
+/*
 resource "kubernetes_service_account" "alb_controller" {
   metadata {
     name      = "aws-load-balancer-controller"
@@ -34,3 +35,4 @@ resource "helm_release" "alb_controller" {
     value = "aws-load-balancer-controller"
   }
 }
+*/

@@ -17,3 +17,13 @@ Check that the ALB load balancer ingress controller is deployed:
 ```
 kubectl get deployments -n kube-system
 ```
+
+Check that the front end pods are running:
+
+```
+kubectl get pods -n app
+```
+
+https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+
+https://aws.amazon.com/elasticloadbalancing/features/
