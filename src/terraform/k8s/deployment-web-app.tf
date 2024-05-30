@@ -48,26 +48,23 @@ resource "kubernetes_deployment" "web_app" {
     delete = "5m"
   }
 }
-/*
+
 resource "kubernetes_service" "web_app" {
   metadata {
     name      = "${local.web_app_name}-service"
     namespace = var.namespace
-    annotations = {
-      "service.beta.kubernetes.io/aws-load-balancer-type" = "alb"
-    }
+
   }
   spec {
-    type = "LoadBalancer"
+    type = "ClusterIP"
     port {
-      port        = 80
-      target_port = 5000
+      port = 5000
     }
     selector = {
       app = local.web_app_name
     }
   }
-}*/
+}
 
 resource "kubernetes_config_map" "web_app" {
   metadata {
