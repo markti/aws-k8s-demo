@@ -10,7 +10,7 @@ resource "kubernetes_service_account" "alb_controller" {
   automount_service_account_token = true
 }
 
-/*
+
 resource "helm_release" "alb_controller" {
 
   name       = "aws-load-balancer-controller"
@@ -34,4 +34,3 @@ resource "helm_release" "alb_controller" {
     value = "aws-load-balancer-controller"
   }
 }
-*/
