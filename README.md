@@ -15,7 +15,7 @@ kubectl get nodes
 Check that the ALB load balancer ingress controller is deployed:
 
 ```
-kubectl get deployments -n kube-system
+kubectl get deployments -n ingress-nginx
 ```
 
 Check that the front end pods are running:

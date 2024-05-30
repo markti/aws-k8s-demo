@@ -76,16 +76,13 @@ resource "kubernetes_config_map" "web_app" {
     BackendEndpoint = ""
   }
 }
-/*
+
 resource "kubernetes_ingress_v1" "web_app" {
   metadata {
     name      = "${local.web_app_name}-ingress"
     namespace = var.namespace
     annotations = {
-      "kubernetes.io/ingress.class"            = "alb"
-      "alb.ingress.kubernetes.io/scheme"       = "internet-facing"
-      "alb.ingress.kubernetes.io/target-type"  = "ip"
-      "alb.ingress.kubernetes.io/listen-ports" = jsonencode([{ "HTTP" : 80 }])
+      "kubernetes.io/ingress.class" = "nginx"
     }
   }
   spec {
@@ -107,5 +104,9 @@ resource "kubernetes_ingress_v1" "web_app" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_service.web_app,
+    helm_release.nginx_ingress
+  ]
 }
-*/
