@@ -58,7 +58,7 @@ resource "kubernetes_service" "web_api" {
   spec {
     type = "ClusterIP"
     port {
-      port        = 8080
+      port        = 80
       target_port = 5000
     }
     selector = {
@@ -77,7 +77,7 @@ resource "kubernetes_config_map" "web_api" {
     BackendEndpoint = ""
   }
 }
-
+/*
 resource "kubernetes_ingress_v1" "web_api" {
   metadata {
     name      = "${local.web_api_name}-ingress"
@@ -111,4 +111,4 @@ resource "kubernetes_ingress_v1" "web_api" {
     kubernetes_service.web_api,
     helm_release.ingress
   ]
-}
+}*/

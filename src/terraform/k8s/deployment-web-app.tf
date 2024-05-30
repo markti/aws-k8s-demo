@@ -103,12 +103,26 @@ resource "kubernetes_ingress_v1" "web_app" {
             }
           }
         }
+        path {
+          path      = "/api"
+          path_type = "Prefix"
+
+          backend {
+            service {
+              name = kubernetes_service.web_api.metadata[0].name
+              port {
+                number = 80
+              }
+            }
+          }
+        }
       }
     }
   }
 
   depends_on = [
     kubernetes_service.web_app,
+    kubernetes_service.web_api,
     helm_release.ingress
   ]
 }
