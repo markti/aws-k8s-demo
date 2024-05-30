@@ -107,6 +107,6 @@ resource "kubernetes_ingress_v1" "web_app" {
 
   depends_on = [
     kubernetes_service.web_app,
-    helm_release.nginx_ingress
+    helm_release.ingress
   ]
 }
