@@ -1,7 +1,7 @@
 resource "kubernetes_ingress_v1" "ingress" {
   metadata {
     name      = "${local.web_app_name}-ingress"
-    namespace = var.namespace
+    namespace = var.k8s_namespace
     annotations = {
       "kubernetes.io/ingress.class" = "nginx"
     }

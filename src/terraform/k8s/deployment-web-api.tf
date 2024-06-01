@@ -6,7 +6,7 @@ locals {
 resource "kubernetes_deployment" "web_api" {
   metadata {
     name      = local.web_api_name
-    namespace = var.namespace
+    namespace = var.k8s_namespace
   }
 
   spec {
@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "web_api" {
 resource "kubernetes_service" "web_api" {
   metadata {
     name      = "${local.web_api_name}-service"
-    namespace = var.namespace
+    namespace = var.k8s_namespace
 
   }
   spec {
@@ -70,7 +70,7 @@ resource "kubernetes_service" "web_api" {
 resource "kubernetes_config_map" "web_api" {
   metadata {
     name      = "${local.web_api_name}-config"
-    namespace = var.namespace
+    namespace = var.k8s_namespace
   }
 
   data = {
