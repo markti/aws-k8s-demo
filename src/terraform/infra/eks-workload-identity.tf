@@ -31,23 +31,25 @@ resource "aws_iam_role" "workload_identity" {
   name               = "${var.application_name}-${var.environment_name}-workload-identity"
 }
 
+data "aws_iam_policy_document" "workload_identity_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret",
+    ]
+
+    resources = [
+      "arn:aws:secretsmanager:${var.primary_region}:${data.aws_caller_identity.current.account_id}:secret:${var.application_name}-${var.environment_name}*",
+    ]
+  }
+}
+
 resource "aws_iam_policy" "workload_identity" {
+
   name        = "${var.application_name}-${var.environment_name}-workload-identity"
   description = "Policy for ${var.application_name}-${var.environment_name} Workload Identity"
-  policy      = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "secretsmanager:GetSecretValue"
-      ],
-      "Resource": [
-        "arn:aws:secretsmanager:${var.primary_region}:${data.aws_caller_identity.current.account_id}:secret:${var.application_name}-${var.environment_name}*"
-      ]
-    }
-  ]
-}
-EOF
+  policy      = data.aws_iam_policy_document.workload_identity_policy.json
+
 }

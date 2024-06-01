@@ -26,6 +26,8 @@ resource "kubernetes_deployment" "web_api" {
       }
 
       spec {
+        service_account_name = kubernetes_service_account.workload_identity.metadata[0].name
+
         container {
           image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.primary_region}.amazonaws.com/${var.web_api_image.name}:${var.web_api_image.version}"
           name  = local.web_api_name

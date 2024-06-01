@@ -24,6 +24,10 @@ Check that the front end pods are running:
 kubectl get pods -n app
 ```
 
+Elastic Load Balancing
 https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
 
 https://aws.amazon.com/elasticloadbalancing/features/
+
+Secrets Manager
+https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html
