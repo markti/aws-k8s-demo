@@ -25,3 +25,6 @@ output "admin_group_arn" {
 output "alb_controller_role" {
   value = aws_iam_role.alb_controller.arn
 }
+output "workload_identity_role" {
+  value = aws_iam_role.workload_identity.arn
+}

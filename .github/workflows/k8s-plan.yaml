@@ -19,6 +19,7 @@ jobs:
       kubernetes_cluster_name: ${{ steps.apply.outputs.kubernetes_cluster_name }}
       primary_region: ${{ steps.apply.outputs.primary_region }}
       alb_controller_role: ${{ steps.apply.outputs.alb_controller_role }}
+      workload_identity_role: ${{ steps.apply.outputs.workload_identity_role }}
 
     environment:
       name: ${{ inputs.environment }}
@@ -56,6 +57,9 @@ jobs:
         alb_controller_role=$(terraform output -raw alb_controller_role)
         echo "alb_controller_role=$alb_controller_role" >> "$GITHUB_OUTPUT"
 
+        workload_identity_role=$(terraform output -raw workload_identity_role)
+        echo "workload_identity_role=$workload_identity_role" >> "$GITHUB_OUTPUT"
+
         primary_region=$(terraform output -raw primary_region)
         echo "primary_region=$primary_region" >> "$GITHUB_OUTPUT"
         
@@ -88,6 +92,7 @@ jobs:
         TF_VAR_cluster_name: ${{ needs.infra.outputs.kubernetes_cluster_name }}
         TF_VAR_primary_region: ${{ needs.infra.outputs.primary_region }}
         TF_VAR_alb_controller_role: ${{ needs.infra.outputs.alb_controller_role }}
+        TF_VAR_workload_identity_role: ${{ needs.infra.outputs.workload_identity_role }}
       working-directory: ./src/terraform/k8s
       run: |
         terraform init \

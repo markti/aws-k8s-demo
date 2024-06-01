@@ -12,7 +12,10 @@ variable "primary_region" {
   type        = string
   description = "Provided by the GitHub Action"
 }
-variable "namespace" {
+variable "k8s_namespace" {
+  type = string
+}
+variable "k8s_service_account_name" {
   type = string
 }
 variable "web_app_image" {
@@ -28,5 +31,8 @@ variable "web_api_image" {
   })
 }
 variable "alb_controller_role" {
+  type = string
+}
+variable "workload_identity_role" {
   type = string
 }
