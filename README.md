@@ -24,6 +24,11 @@ Check that the front end pods are running:
 kubectl get pods -n app
 ```
 
+Check the pod to see if the secrets are accessible from the environment variable.
+```
+kubectl -n app exec -it fleet-api-67646d7db4-58l8n -- sh
+```
+
 Elastic Load Balancing
 https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
 
