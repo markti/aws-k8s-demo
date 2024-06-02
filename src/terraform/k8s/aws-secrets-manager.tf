@@ -5,6 +5,11 @@ resource "helm_release" "csi_secrets_store" {
   chart      = "secrets-store-csi-driver"
   namespace  = "kube-system"
 
+  set {
+    name  = "syncSecret.enabled"
+    value = "true"
+  }
+
 }
 
 
@@ -43,6 +48,16 @@ resource "kubernetes_manifest" "secret_provider_class" {
           }
         ])
       }
+      secretObjects = [
+        for key, value in local.secrets : {
+          secretName = key
+          type       = "Opaque"
+          data = {
+            objectName = key
+            key        = value
+          }
+        }
+      ]
     }
   }
 
