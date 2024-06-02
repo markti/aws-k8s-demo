@@ -19,7 +19,7 @@ resource "helm_release" "aws_secrets_provider" {
 
 locals {
   secrets = {
-    "${var.application_name}-${var.environment_name}-connection-string" = "DB_CONNECTION_STRING"
+    "fleet-portal-dev-connection-string" = "DB_CONNECTION_STRING"
   }
 }
 
