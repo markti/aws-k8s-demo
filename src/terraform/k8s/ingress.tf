@@ -21,7 +21,7 @@ resource "kubernetes_ingress_v1" "ingress" {
               }
             }
           }
-        }
+        } /*
         path {
           path      = "/api"
           path_type = "Prefix"
@@ -34,14 +34,14 @@ resource "kubernetes_ingress_v1" "ingress" {
               }
             }
           }
-        }
+        }*/
       }
     }
   }
 
   depends_on = [
     kubernetes_service.web_app,
-    kubernetes_service.web_api,
+    /*kubernetes_service.web_api,*/
     helm_release.ingress
   ]
 }
