@@ -7,7 +7,7 @@ namespace FleetAPI.Controllers
     public class TestController : ControllerBase
     {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<TestController> _logger;
 
         public TestController(ILogger<TestController> logger)
         {
