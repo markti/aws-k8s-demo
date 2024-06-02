@@ -48,16 +48,6 @@ resource "kubernetes_manifest" "secret_provider_class" {
           }
         ])
       }
-      secretObjects = [
-        for key, value in local.secrets : {
-          secretName = key
-          type       = "Opaque"
-          data = {
-            objectName = key
-            key        = value
-          }
-        }
-      ]
     }
   }
 
