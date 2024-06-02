@@ -1,10 +1,10 @@
-resource "helm_release" "secrets_store_csi_driver" {
-  name       = "ingress"
+resource "helm_release" "csi_secrets_store" {
+  name       = "csi-secrets-store"
   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
-  chart      = "csi-secrets-store"
+  chart      = "secrets-store-csi-driver"
   namespace  = "kube-system"
-
 }
+
 /*
 resource "helm_release" "secrets_store_csi_driver" {
   name       = "ingress"
