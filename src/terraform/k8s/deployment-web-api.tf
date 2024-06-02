@@ -42,9 +42,17 @@ resource "kubernetes_deployment" "web_api" {
         container {
           image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.primary_region}.amazonaws.com/${var.web_api_image.name}:${var.web_api_image.version}"
           name  = local.web_api_name
+
           port {
             container_port = 5000
           }
+
+          volume_mount {
+            name       = "secrets-store-inline"
+            mount_path = "/mnt/secrets-store"
+            read_only  = true
+          }
+
           env_from {
             config_map_ref {
               name = kubernetes_config_map.web_api.metadata.0.name
