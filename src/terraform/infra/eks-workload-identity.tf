@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "workload_identity_policy" {
     ]
 
     resources = [
-      "arn:aws:secretsmanager:${var.primary_region}:${data.aws_caller_identity.current.account_id}:secret:${var.application_name}-${var.environment_name}*",
+      "*",
     ]
   }
 }
