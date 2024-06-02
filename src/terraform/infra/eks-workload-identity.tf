@@ -53,3 +53,8 @@ resource "aws_iam_policy" "workload_identity" {
   policy      = data.aws_iam_policy_document.workload_identity_policy.json
 
 }
+
+resource "aws_iam_role_policy_attachment" "workload_identity_policy" {
+  policy_arn = aws_iam_policy.workload_identity.arn
+  role       = aws_iam_role.workload_identity.name
+}
