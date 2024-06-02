@@ -2,7 +2,7 @@
 locals {
   web_api_name = "fleet-api"
 }
-
+/*
 resource "kubernetes_deployment" "web_api" {
   metadata {
     name      = local.web_api_name
@@ -107,3 +107,4 @@ resource "kubernetes_config_map" "web_api" {
     BackendEndpoint = ""
   }
 }
+*/
