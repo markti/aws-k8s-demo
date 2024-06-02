@@ -34,7 +34,7 @@ resource "kubernetes_deployment" "web_api" {
             driver    = "secrets-store.csi.k8s.io"
             read_only = true
             volume_attributes = {
-              "secretProviderClass" = kubernetes_manifest.secret_provider_class.manifest.metadata.0.name
+              "secretProviderClass" = kubernetes_manifest.secret_provider_class.manifest.metadata.name
             }
           }
         }
@@ -54,7 +54,7 @@ resource "kubernetes_deployment" "web_api" {
             name = "DB_CONNECTION_STRING"
             value_from {
               secret_key_ref {
-                name = kubernetes_manifest.secret_provider_class.manifest.metadata.0.name
+                name = kubernetes_manifest.secret_provider_class.manifest.metadata.name
                 key  = "DB_CONNECTION_STRING"
               }
             }
