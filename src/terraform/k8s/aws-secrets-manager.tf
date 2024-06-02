@@ -40,14 +40,26 @@ resource "kubernetes_manifest" "secret_provider_class" {
     spec = {
       provider = "aws"
       parameters = {
-        objects = jsonencode([
-          for key, value in local.secrets : {
-            objectName         = key
+        objects = yamlencode([
+          {
+            objectName         = "fleet-portal-dev-connection-string"
             objectType         = "secretsmanager"
             objectVersionLabel = "AWSCURRENT"
           }
         ])
       }
+      secretObjects = [
+        {
+          data = [
+            {
+              key        = "fleet-portal-dev-connection-string"
+              objectName = "fleet-portal-dev-connection-string"
+            }
+          ]
+          secretName = "fleet-portal-dev-connection-string"
+          type       = "Opaque"
+        }
+      ]
     }
   }
 
