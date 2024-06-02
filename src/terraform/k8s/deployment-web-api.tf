@@ -58,16 +58,15 @@ resource "kubernetes_deployment" "web_api" {
               name = kubernetes_config_map.web_api.metadata.0.name
             }
           }
-          /*
           env {
             name = "DB_CONNECTION_STRING"
             value_from {
               secret_key_ref {
-                name = kubernetes_manifest.secret_provider_class.manifest.metadata.name
-                key  = "DB_CONNECTION_STRING"
+                name = "fleet-portal-dev-connection-string"
+                key  = "fleet-portal-dev-connection-string"
               }
             }
-          }*/
+          }
         }
       }
     }
