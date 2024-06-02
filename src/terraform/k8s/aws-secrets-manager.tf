@@ -7,7 +7,7 @@ resource "helm_release" "csi_secrets_store" {
 
 
 resource "helm_release" "aws_secrets_provider" {
-  name       = "ingress"
+  name       = "secrets-provider-aws"
   repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
   chart      = "secrets-provider-aws"
   namespace  = "kube-system"
