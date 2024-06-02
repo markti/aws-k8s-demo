@@ -2,7 +2,7 @@
 locals {
   web_api_name = "fleet-api"
 }
-
+/*
 resource "kubernetes_deployment" "web_api" {
   metadata {
     name      = local.web_api_name
@@ -73,8 +73,8 @@ resource "kubernetes_deployment" "web_api" {
   }
 
   timeouts {
-    create = "5m"
-    update = "5m"
+    create = "15m"
+    update = "15m"
     delete = "5m"
   }
 }
@@ -107,3 +107,4 @@ resource "kubernetes_config_map" "web_api" {
     BackendEndpoint = ""
   }
 }
+*/
