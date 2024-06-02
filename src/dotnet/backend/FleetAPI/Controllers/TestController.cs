@@ -15,7 +15,7 @@ namespace FleetAPI.Controllers
         }
 
         [HttpGet(Name = "GetConnectionString")]
-        public IEnumerable<WeatherForecast> Get()
+        public string Get()
         {
             string dbConnStr = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             return dbConnStr;
