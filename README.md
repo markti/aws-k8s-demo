@@ -31,3 +31,5 @@ https://aws.amazon.com/elasticloadbalancing/features/
 
 Secrets Manager
 https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html
+
+https://github.com/aws/secrets-store-csi-driver-provider-aws

@@ -5,12 +5,11 @@ resource "helm_release" "csi_secrets_store" {
   namespace  = "kube-system"
 }
 
-/*
-resource "helm_release" "secrets_store_csi_driver" {
+
+resource "helm_release" "aws_secrets_provider" {
   name       = "ingress"
   repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
   chart      = "secrets-provider-aws"
   namespace  = "kube-system"
 
 }
-*/
