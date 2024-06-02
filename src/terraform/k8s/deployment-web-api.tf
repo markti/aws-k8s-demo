@@ -58,6 +58,7 @@ resource "kubernetes_deployment" "web_api" {
               name = kubernetes_config_map.web_api.metadata.0.name
             }
           }
+          /*
           env {
             name = "DB_CONNECTION_STRING"
             value_from {
@@ -66,7 +67,7 @@ resource "kubernetes_deployment" "web_api" {
                 key  = "DB_CONNECTION_STRING"
               }
             }
-          }
+          }*/
         }
       }
     }
