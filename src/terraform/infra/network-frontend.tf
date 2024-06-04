@@ -19,7 +19,10 @@ resource "aws_route_table" "frontend" {
     gateway_id = aws_internet_gateway.main.id
   }
 
-  depends_on = [aws_vpc.main, aws_internet_gateway.main]
+  depends_on = [
+    aws_vpc.main, 
+    aws_internet_gateway.main
+    ]
 }
 
 resource "aws_route_table_association" "frontend" {

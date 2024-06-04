@@ -43,4 +43,9 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat[each.key].id
   subnet_id     = aws_subnet.frontend[each.key].id
 
+  depends_on = [ 
+    aws_internet_gateway.main,
+    aws_eip.nat[each.key]
+    ]
+
 }
