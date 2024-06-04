@@ -9,6 +9,7 @@ resource "aws_ecr_repository" "main" {
 
   name                 = "ecr-${var.application_name}-${var.environment_name}-${each.key}"
   image_tag_mutability = "MUTABLE"
+  force_delete         = true
 
   tags = {
     application = var.application_name
