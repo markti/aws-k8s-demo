@@ -10,10 +10,10 @@ The Docker code is stored in two `Dockerfile` files for both the `frontend` and 
 
 ## Terraform Code
 
-The Terraform code is stored in `src\terraform`. However, there are two root modules. One for the Azure infrastructure that leverages the `aws` provider in the `src\terraform\infra` folder and another for the Kubernetes configuration that leverages the `kubernetes` and `helm` Terraform providers residing in the `src\terraform\k8s` folder.
+The Terraform code is stored in `src\terraform`. However, there are two root modules. One for the AWS infrastructure that leverages the `aws` provider in the `src\terraform\infra` folder and another for the Kubernetes configuration that leverages the `kubernetes` and `helm` Terraform providers residing in the `src\terraform\k8s` folder.
 
 ### AWS Infrastructure
-The Terraform root module that provisions the Azure infrastructure will provision both an AWS Elastic Container Registry, an Elastic Kubernetes Service (EKS) cluster and all surrounding resources. The Elastic Container Registry is required in order to build and publish the Docker images.
+The Terraform root module that provisions the AWS infrastructure will provision both an AWS Elastic Container Registry, an Elastic Kubernetes Service (EKS) cluster and all surrounding resources. The Elastic Container Registry is required in order to build and publish the Docker images.
 
 You may need to change the `primary_region` input variable value if you wish to deploy to a different region. The default is `us-west-2`.
 
@@ -30,7 +30,7 @@ If you want to provision more than one environment you may need to remove the `e
 ## GitHub Actions Workflows
 
 ### Docker Workflows
-There are two GitHub Actions workflows that use Docker to build and push the container images. These need to be executed after Terraform has been used to provision the Azure infrastructure.
+There are two GitHub Actions workflows that use Docker to build and push the container images. These need to be executed after Terraform has been used to provision the AWS infrastructure.
 
 ### Terraform Workflows
 The directory `.github/workflows/` contains GitHub Actions workflows that implement a CI/CD solution using Docker and Terraform. There are individual workflows for the three Terraform core workflow operations `plan`, `apply`, and `destroy`.
